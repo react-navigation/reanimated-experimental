@@ -56,6 +56,7 @@ export default class AnimatedNode {
   }
 
   __attach() {
+    const started = ReanimatedModule.startBatch();
     this.__nativeInitialize();
 
     const nodes = this.__inputNodes;
@@ -64,6 +65,9 @@ export default class AnimatedNode {
       for (let i = 0, l = nodes.length; i < l; i++) {
         nodes[i].__addChild(this);
       }
+    }
+    if (started) {
+      ReanimatedModule.endBatch();
     }
   }
 

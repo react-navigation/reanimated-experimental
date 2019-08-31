@@ -205,6 +205,49 @@ public class ReanimatedModule extends ReactContextBaseJavaModule implements
   }
 
   @ReactMethod
+  public void sendBatch(final ReadableArray batch) {
+    int size = batch.size();
+    for (int i = 0; i < size; i++) {
+      final ReadableMap action = batch.getMap(i);
+      int type = action.getInt("type");
+      switch (type) {
+        case 0:
+          this.createNode(action.getInt("nodeID"), action.getMap("config"));
+          break;
+
+        case 1:
+          this.dropNode(action.getInt("nodeID"));
+          break;
+
+        case 2:
+          this.connectNodes(action.getInt("parentID"), action.getInt("childID"));
+          break;
+
+        case 3:
+          this.disconnectNodes(action.getInt("parentID"), action.getInt("childID"));
+          break;
+
+        case 4:
+          this.connectNodeToView(action.getInt("nodeID"), action.getInt("viewTag"));
+          break;
+
+        case 5:
+          this.disconnectNodeFromView(action.getInt("nodeID"), action.getInt("viewTag"));
+          break;
+
+        case 6:
+          this.attachEvent(action.getInt("viewTag"), action.getString("eventName"), action.getInt("nodeID"));
+          break;
+
+        case 7:
+          this.detachEvent(action.getInt("viewTag"), action.getString("eventName"), action.getInt("nodeID"));
+          break;
+      }
+
+    }
+  }
+
+  @ReactMethod
   public void getValue(final int nodeID, final Callback callback) {
     mOperations.add(new UIThreadOperation() {
       @Override
