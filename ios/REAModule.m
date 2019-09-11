@@ -56,7 +56,6 @@ RCT_EXPORT_METHOD(animateNextTransition:(nonnull NSNumber *)rootTag config:(NSDi
 RCT_EXPORT_METHOD(sendBatch:(nonnull NSArray *)batch)
 {
     for (NSDictionary* action in batch) {
-        NSDictionary* config = [action objectForKey:@"config"];
         int type = [[action objectForKey:@"type"] intValue];
         switch (type)
         {
