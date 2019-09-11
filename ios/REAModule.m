@@ -55,68 +55,68 @@ RCT_EXPORT_METHOD(animateNextTransition:(nonnull NSNumber *)rootTag config:(NSDi
 
 RCT_EXPORT_METHOD(sendBatch:(nonnull NSArray *)batch)
 {
-    for (NSDictionary* action in batch) {
-        int type = [[action objectForKey:@"type"] intValue];
-        switch (type)
-        {
-            case 0:
-            {
-                NSNumber* nodeID = [action objectForKey:@"nodeID"];
-                [self createNode:nodeID config:config];
-                break;
-            }
-            case 1:
-            {
-                NSNumber* nodeID = [action objectForKey:@"nodeID"];
-                [self dropNode:nodeID];
-                break;
-            }
-            case 2:
-            {
-                NSNumber* parentID = [action objectForKey:@"parentID"];
-                NSNumber* childID = [action objectForKey:@"childID"];
-                [self connectNodes:parentID childTag:childID];
-                break;
-            }
-            case 3:
-            {
-                NSNumber* parentID = [action objectForKey:@"parentID"];
-                NSNumber* childID = [action objectForKey:@"childID"];
-                [self disconnectNodes:parentID childTag:childID];
-                break;
-            }
-            case 4:
-            {
-                NSNumber* nodeID = [action objectForKey:@"nodeID"];
-                NSNumber* viewTag = [action objectForKey:@"viewTag"];
-                [self connectNodeToView:nodeID viewTag:viewTag];
-                break;
-            }
-            case 5:
-            {
-                NSNumber* nodeID = [action objectForKey:@"nodeID"];
-                NSNumber* viewTag = [action objectForKey:@"viewTag"];
-                [self disconnectNodeFromView:nodeID viewTag:viewTag];
-                break;
-            }
-            case 6:
-            {
-                NSNumber* viewTag = [action objectForKey:@"viewTag"];
-                NSString* eventName = [action objectForKey:@"eventName"];
-                NSNumber* nodeID = [action objectForKey:@"nodeID"];
-                [self attachEvent:viewTag eventName:eventName eventNodeID:nodeID];
-                break;
-            }
-            case 7:
-            {
-                NSNumber* viewTag = [action objectForKey:@"viewTag"];
-                NSString* eventName = [action objectForKey:@"eventName"];
-                NSNumber* nodeID = [action objectForKey:@"nodeID"];
-                [self detachEvent:viewTag eventName:eventName eventNodeID:nodeID];
-                break;
-            }
-        }
+  for (NSDictionary* action in batch) {
+    int type = [[action objectForKey:@"type"] intValue];
+    switch (type)
+    {
+      case 0:
+      {
+        NSNumber* nodeID = [action objectForKey:@"nodeID"];
+        [self createNode:nodeID config:config];
+        break;
+      }
+      case 1:
+      {
+        NSNumber* nodeID = [action objectForKey:@"nodeID"];
+        [self dropNode:nodeID];
+        break;
+      }
+      case 2:
+      {
+        NSNumber* parentID = [action objectForKey:@"parentID"];
+        NSNumber* childID = [action objectForKey:@"childID"];
+        [self connectNodes:parentID childTag:childID];
+        break;
+      }
+      case 3:
+      {
+        NSNumber* parentID = [action objectForKey:@"parentID"];
+        NSNumber* childID = [action objectForKey:@"childID"];
+        [self disconnectNodes:parentID childTag:childID];
+        break;
+      }
+      case 4:
+      {
+        NSNumber* nodeID = [action objectForKey:@"nodeID"];
+        NSNumber* viewTag = [action objectForKey:@"viewTag"];
+        [self connectNodeToView:nodeID viewTag:viewTag];
+        break;
+      }
+      case 5:
+      {
+        NSNumber* nodeID = [action objectForKey:@"nodeID"];
+        NSNumber* viewTag = [action objectForKey:@"viewTag"];
+        [self disconnectNodeFromView:nodeID viewTag:viewTag];
+        break;
+      }
+      case 6:
+      {
+        NSNumber* viewTag = [action objectForKey:@"viewTag"];
+        NSString* eventName = [action objectForKey:@"eventName"];
+        NSNumber* nodeID = [action objectForKey:@"nodeID"];
+        [self attachEvent:viewTag eventName:eventName eventNodeID:nodeID];
+        break;
+      }
+      case 7:
+      {
+        NSNumber* viewTag = [action objectForKey:@"viewTag"];
+        NSString* eventName = [action objectForKey:@"eventName"];
+        NSNumber* nodeID = [action objectForKey:@"nodeID"];
+        [self detachEvent:viewTag eventName:eventName eventNodeID:nodeID];
+        break;
+      }
     }
+  }
 }
 
 RCT_EXPORT_METHOD(createNode:(nonnull NSNumber *)nodeID
